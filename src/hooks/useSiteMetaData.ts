@@ -14,7 +14,7 @@ export const useSiteMetadata = () => {
   `);
 
   return {
-    title: data.site?.siteMetadata?.title ?? "Vanessa Sangiorgio",
+    title: data.site?.siteMetadata?.title ?? "Andrew Carter",
     description: data.site?.siteMetadata?.description ?? "",
     siteUrl: data.site?.siteMetadata?.siteUrl ?? "",
   };

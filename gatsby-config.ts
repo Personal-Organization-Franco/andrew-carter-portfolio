@@ -8,8 +8,10 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Andrew Carter Portfolio`,
-    siteUrl: `https://www.andrewcarter.tld`,
+    title: "Andrew Carter Portfolio",
+    siteUrl: "https://www.andrewcarter.com",
+    description:
+      "A London-based Senior Visual Designer—Design Systems, who is very passionate about the way design can be used to solve various kinds of problems. Currently working at Google, previously at Bumble and Revolut.",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

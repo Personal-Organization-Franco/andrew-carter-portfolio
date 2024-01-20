@@ -1,9 +1,14 @@
 import type { HeadFC } from "gatsby";
 import SEO from "components/SEO";
 import MainLayout from "components/MainLayout";
+import { AppContextProvider } from "context";
 
 const IndexPage = () => {
-  return <MainLayout>SOMETHING INSIDE HERE ????</MainLayout>;
+  return (
+    <AppContextProvider>
+      <MainLayout>SOMETHING INSIDE HERE ????</MainLayout>
+    </AppContextProvider>
+  );
 };
 
 export default IndexPage;

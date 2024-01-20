@@ -110,6 +110,7 @@
     "./gatsby-node.ts",
     "./gatsby-config.ts",
     "./plugins/**/*",
-    "./index.d.ts"
+    "./index.d.ts",
+    "./global.d.ts"
   ]
 }

@@ -17,6 +17,9 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
+  flags: {
+    DEV_SSR: true,
+  },
   plugins: [
     "gatsby-plugin-root-import",
     {
@@ -56,6 +59,7 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-transformer-sharp",
+    "gatsby-plugin-provide-react",
     "gatsby-plugin-postcss",
     "gatsby-plugin-sitemap",
     {

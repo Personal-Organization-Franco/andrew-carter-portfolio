@@ -16,13 +16,15 @@ const Header = () => {
   const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
     if (error.length) {
       setShowNotification(true);
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         setShowNotification(false);
         setError("");
       }, 3000);
     }
+    return () => clearTimeout(timeout);
   }, [error]);
 
   const setPasswordCookie = () => {

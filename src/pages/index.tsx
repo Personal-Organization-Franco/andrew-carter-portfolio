@@ -2,11 +2,14 @@ import type { HeadFC } from "gatsby";
 import SEO from "components/SEO";
 import MainLayout from "components/MainLayout";
 import { AppContextProvider } from "context";
+import HeroSection from "components/HeroSection";
 
 const IndexPage = () => {
   return (
     <AppContextProvider>
-      <MainLayout>SOMETHING INSIDE HERE ????</MainLayout>
+      <MainLayout>
+        <HeroSection />
+      </MainLayout>
     </AppContextProvider>
   );
 };

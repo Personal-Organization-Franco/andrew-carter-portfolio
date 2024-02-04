@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import ExpandAll from "assets/expand-all.svg";
 import Padlock from "assets/padlock.svg";
@@ -14,17 +14,17 @@ const Header = () => {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+  const timeout = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
     if (error.length) {
       setShowNotification(true);
-      timeout = setTimeout(() => {
+      timeout.current = setTimeout(() => {
         setShowNotification(false);
         setError("");
       }, 3000);
     }
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout.current);
   }, [error]);
 
   const setPasswordCookie = () => {
@@ -69,6 +69,7 @@ const Header = () => {
             <Padlock />
             <input
               type="password"
+              autoComplete="off"
               id="password"
               placeholder="password"
               value={value}

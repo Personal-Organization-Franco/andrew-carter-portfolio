@@ -32,15 +32,15 @@ function HeroSection() {
         <div className="watch-container w-48 h-48 mr-20 relative">
           {watchOverlay && watchBackround ? (
             <>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10">
                 <GatsbyImage
                   image={watchOverlay}
                   alt="watch overlay"
                   className="watch-overlay"
                 />
               </div>
-              <WatchNeedles className="watch-needles absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <WatchNeedles className="watch-needles absolute m-auto top-6 left-6 right-0 z-20" />
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
                 <GatsbyImage
                   image={watchBackround}
                   alt="watch background"

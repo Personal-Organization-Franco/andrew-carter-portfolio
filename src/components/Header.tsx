@@ -10,7 +10,7 @@ import { setCookie } from "utils/setCookie";
 
 const Header = () => {
   const passwordIsSet = isPasswordSet();
-  const { expandAll } = useAppContext();
+  const { expandAll, togglePasswordIsSet } = useAppContext();
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
@@ -41,11 +41,13 @@ const Header = () => {
     setError("");
     if (!value) return;
     setPasswordCookie();
+    togglePasswordIsSet(true);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && value) {
       setPasswordCookie();
+      togglePasswordIsSet(true);
     }
     if (event.key !== "Enter" && error.length) {
       setError("");
@@ -62,11 +64,11 @@ const Header = () => {
       <div className="text-black text-lg font-normal pb-2 pt-[9px]">
         Andrew Carter
       </div>
-      <div className={`absoluteflex relative ${afterStyles} flex items-center`}>
+      <div className={`flex relative ${afterStyles} flex items-center`}>
         {passwordIsSet && expandAll ? <ExpandAll className="mr-3" /> : null}
         {passwordIsSet ? null : (
           <div className="flex items-center">
-            <Padlock />
+            <Padlock className="ml-1" />
             <input
               type="password"
               autoComplete="off"

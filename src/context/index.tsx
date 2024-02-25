@@ -1,13 +1,19 @@
 import { createContext, useContext, useReducer } from "react";
+import { isPasswordSet } from "utils/isPasswordSet";
 
 type Context = {
   expandAll: boolean;
+  passwordIsSet: boolean;
 };
 
-type AppState = Context & { toggleExpandAll(): void };
+type AppState = Context & {
+  toggleExpandAll(): void;
+  togglePasswordIsSet(payload?: boolean): void;
+};
 
 const INITIAL_STATE: Context = {
   expandAll: false,
+  passwordIsSet: isPasswordSet(),
 };
 
 type ExpandAllAction = {
@@ -15,27 +21,45 @@ type ExpandAllAction = {
   payload: boolean;
 };
 
-type Action = ExpandAllAction;
+type TogglePasswordIsSetAction = {
+  type: "TOGGLE_PASSWORD_IS_SET";
+  payload: boolean;
+};
+
+type Action = ExpandAllAction | TogglePasswordIsSetAction;
 
 const reducer = (state = INITIAL_STATE, action: Action) => {
   switch (action.type) {
     case "TOGGLE_EXPAND_ALL":
       return { ...state, expandAll: action.payload };
+
+    case "TOGGLE_PASSWORD_IS_SET":
+      return { ...state, passwordIsSet: action.payload };
+
     default:
       return state;
   }
 };
 
 function useAppContextReducer(): AppState {
-  const [{ expandAll }, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [{ expandAll, passwordIsSet }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE,
+  );
 
   function toggleExpandAll() {
     dispatch({ type: "TOGGLE_EXPAND_ALL", payload: !expandAll });
   }
 
+  function togglePasswordIsSet(payload: boolean) {
+    dispatch({ type: "TOGGLE_PASSWORD_IS_SET", payload });
+  }
+
   return {
     expandAll,
+    passwordIsSet,
     toggleExpandAll,
+    togglePasswordIsSet,
   };
 }
 

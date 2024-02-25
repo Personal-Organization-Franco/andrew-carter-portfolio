@@ -10,7 +10,8 @@ import { setCookie } from "utils/setCookie";
 
 const Header = () => {
   const passwordIsSet = isPasswordSet();
-  const { expandAll, togglePasswordIsSet } = useAppContext();
+  const { expandAll, setActiveIndex, togglePasswordIsSet, toggleExpandAll } =
+    useAppContext();
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
@@ -60,12 +61,20 @@ const Header = () => {
     : "";
 
   return (
-    <header className="flex justify-between pl-1.5 border-b border-b-grey-1 mb-4">
+    <header className="flex justify-between pl-1.5 border-b border-b-grey-1 mb-4 sticky top-0 bg-white">
       <div className="text-black text-lg font-normal pb-2 pt-[9px]">
         Andrew Carter
       </div>
       <div className={`flex relative ${afterStyles} flex items-center`}>
-        {passwordIsSet && expandAll ? <ExpandAll className="mr-3" /> : null}
+        {passwordIsSet && expandAll ? (
+          <ExpandAll
+            className="mr-3 cursor-pointer"
+            onClick={() => {
+              toggleExpandAll();
+              setActiveIndex(null);
+            }}
+          />
+        ) : null}
         {passwordIsSet ? null : (
           <div className="flex items-center">
             <Padlock className="ml-1" />
@@ -87,7 +96,7 @@ const Header = () => {
         )}
       </div>
       {showNotification && (
-        <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center pointer-events-none">
+        <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center pointer-events-none">
           <div className="bg-black text-white text-base font-normal py-3.5 px-5 opacity-80 rounded-[14px]">
             {error}
           </div>

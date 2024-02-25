@@ -1,12 +1,12 @@
+import Accordion from "components/Accordion";
 import { useAppContext } from "context";
 import { useAccordionSection } from "hooks/useAccordionSection";
 import { useEffect, useState } from "react";
 
 function AccordionSection() {
   const accordionSectionData = useAccordionSection();
-  const { expandAll, toggleExpandAll, passwordIsSet } = useAppContext();
-
-  console.log("passwordIsSet", passwordIsSet);
+  const { expandAll, setActiveIndex, toggleExpandAll, passwordIsSet } =
+    useAppContext();
 
   const {
     projectsIndexText = "",
@@ -21,17 +21,23 @@ function AccordionSection() {
         {projectsIndexText}
       </p>
       {!passwordIsSet && (
-        <p className="font-normal text-black text-lg">{projectsPasswordText}</p>
+        <p className="font-normal text-black text-lg mb-16">
+          {projectsPasswordText}
+        </p>
       )}
       {passwordIsSet ? (
         <button
           type="button"
-          className="font-normal text-black text-lg"
-          onClick={toggleExpandAll}
+          className="font-normal text-black text-lg mb-16"
+          onClick={() => {
+            toggleExpandAll();
+            setActiveIndex(null);
+          }}
         >
           {expandAll ? collapseAllText : expandAllText}
         </button>
       ) : null}
+      <Accordion />
     </div>
   );
 }

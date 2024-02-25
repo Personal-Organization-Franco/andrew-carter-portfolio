@@ -66,6 +66,9 @@ devDependencies:
   "@babel/preset-typescript":
     specifier: ^7.22.15
     version: 7.23.3(@babel/core@7.23.7)
+  "@contentful/rich-text-types":
+    specifier: ^16.3.4
+    version: 16.3.4
   "@gatsbyjs/reach-router":
     specifier: ^2.0.1
     version: 2.0.1(react-dom@18.2.0)(react@18.2.0)
@@ -2004,7 +2007,7 @@ packages:
       react: ^16.8.6 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.6 || ^17.0.0 || ^18.0.0
     dependencies:
-      "@contentful/rich-text-types": 16.3.0
+      "@contentful/rich-text-types": 16.3.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -2017,13 +2020,12 @@ packages:
     engines: { node: ">=6.0.0" }
     dev: false
 
-  /@contentful/rich-text-types@16.3.0:
+  /@contentful/rich-text-types@16.3.4:
     resolution:
       {
-        integrity: sha512-OfQmAu5bxE0CgQA3WlUleVej+ifFG/iXmB2DmUl4EyWyFue1aiIvfjxQhcDRSH4n1jUNMJ6L1wInZL8uV5m3TQ==,
+        integrity: sha512-PyVSrQa5j1hO4grgA0Ivo/taiOvW0uFN79JB5JkTG8U7DnWGI7Ap2As6zN6/E6YvDqb7w2cYRMSGSQ3qfxu8HQ==,
       }
     engines: { node: ">=6.0.0" }
-    dev: false
 
   /@cspotcode/source-map-support@0.8.1:
     resolution:
@@ -7452,7 +7454,7 @@ packages:
     engines: { node: ">=12" }
     requiresBuild: true
     dependencies:
-      "@contentful/rich-text-types": 16.3.0
+      "@contentful/rich-text-types": 16.3.4
       axios: 0.27.2
       contentful-resolve-response: 1.8.1
       contentful-sdk-core: 7.1.0

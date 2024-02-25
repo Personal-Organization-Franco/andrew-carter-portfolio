@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import ExpandAll from "assets/expand-all.svg";
 import Padlock from "assets/padlock.svg";
@@ -10,21 +10,21 @@ import { setCookie } from "utils/setCookie";
 
 const Header = () => {
   const passwordIsSet = isPasswordSet();
-  const { expandAll } = useAppContext();
+  const { expandAll, togglePasswordIsSet } = useAppContext();
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+  const timeout = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
     if (error.length) {
       setShowNotification(true);
-      timeout = setTimeout(() => {
+      timeout.current = setTimeout(() => {
         setShowNotification(false);
         setError("");
       }, 3000);
     }
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout.current);
   }, [error]);
 
   const setPasswordCookie = () => {
@@ -41,11 +41,13 @@ const Header = () => {
     setError("");
     if (!value) return;
     setPasswordCookie();
+    togglePasswordIsSet(true);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && value) {
       setPasswordCookie();
+      togglePasswordIsSet(true);
     }
     if (event.key !== "Enter" && error.length) {
       setError("");
@@ -62,13 +64,14 @@ const Header = () => {
       <div className="text-black text-lg font-normal pb-2 pt-[9px]">
         Andrew Carter
       </div>
-      <div className={`absoluteflex relative ${afterStyles} flex items-center`}>
+      <div className={`flex relative ${afterStyles} flex items-center`}>
         {passwordIsSet && expandAll ? <ExpandAll className="mr-3" /> : null}
         {passwordIsSet ? null : (
           <div className="flex items-center">
-            <Padlock />
+            <Padlock className="ml-1" />
             <input
               type="password"
+              autoComplete="off"
               id="password"
               placeholder="password"
               value={value}

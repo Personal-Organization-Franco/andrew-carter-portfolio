@@ -4,6 +4,7 @@ import { useAppContext } from "context";
 import { useAccordionSection } from "hooks/useAccordionSection";
 import { AccordionContent } from "./AccordionContent";
 import PadlockGray from "assets/padlockgray.svg";
+import { randomId } from "utils/randomId";
 
 function Accordion() {
   const {
@@ -78,14 +79,7 @@ function Accordion() {
           : "cursor-pointer";
 
         return (
-          <Fragment
-            key={`${project}${year}${type}${company}${
-              Date.now().toString(36) +
-              Math.floor(
-                Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12),
-              ).toString(36)
-            }`}
-          >
+          <Fragment key={`${project}${year}${type}${company}${randomId()}`}>
             <div
               onClick={
                 !projectIsProtected

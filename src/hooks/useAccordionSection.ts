@@ -48,7 +48,6 @@ export const useAccordionSection = () => {
               }
               ... on ContentfulOneImageOneVideo5050 {
                 name
-                imagePositionedOnTheLeft
                 imageAndVideo {
                   file {
                     contentType

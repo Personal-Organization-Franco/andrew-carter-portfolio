@@ -1,7 +1,6 @@
 import Accordion from "components/Accordion";
 import { useAppContext } from "context";
 import { useAccordionSection } from "hooks/useAccordionSection";
-import { useEffect, useState } from "react";
 
 function AccordionSection() {
   const accordionSectionData = useAccordionSection();

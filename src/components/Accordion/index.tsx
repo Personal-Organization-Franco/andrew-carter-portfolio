@@ -1,10 +1,19 @@
+import { Fragment, useCallback } from "react";
+
 import { useAppContext } from "context";
-import { useCallback } from "react";
+import { useAccordionSection } from "hooks/useAccordionSection";
+import { AccordionContent } from "./AccordionContent";
+import PadlockGray from "assets/padlockgray.svg";
 
 function Accordion() {
-  const { expandAll, toggleExpandAll, activeIndex, setActiveIndex } =
-    useAppContext();
-  const ACCORDION_ENTRIES = [1, 2, 3, 4, 5];
+  const {
+    expandAll,
+    toggleExpandAll,
+    activeIndex,
+    passwordIsSet,
+    setActiveIndex,
+  } = useAppContext();
+  const accordionSectionData = useAccordionSection();
 
   const isActiveIndex = useCallback(
     (index: number) => {
@@ -13,39 +22,41 @@ function Accordion() {
     [activeIndex],
   );
 
-  const handleAccordionHeaderClick = (index: number) => () => {
-    if (expandAll) {
-      toggleExpandAll();
-      setActiveIndex(null);
+  const handleAccordionHeaderClick =
+    (index: number, projectIsProtected: boolean) => () => {
+      if (projectIsProtected) return;
+      if (expandAll) {
+        toggleExpandAll();
+        setActiveIndex(null);
+        setActiveIndex(index);
+        return;
+      }
+      if (isActiveIndex(index)) {
+        setActiveIndex(null);
+        return;
+      }
+
       setActiveIndex(index);
-      return;
-    }
-    if (isActiveIndex(index)) {
-      setActiveIndex(null);
-      return;
-    }
-
-    setActiveIndex(index);
-  };
-
+    };
+  const accordions = accordionSectionData?.accordions || [];
   return (
     <>
-      <div className="grid grid-cols-[2fr 3fr 6fr 5fr] grid-flow-col">
+      <div className="grid grid-cols-[2fr_3fr_6fr_5fr]">
         {/* Grid header */}
-        <div className="col-span-2">
+        <div>
           <p className="font-normal text-grey-2 text-lg">Year</p>
         </div>
-        <div className="col-span-3">
+        <div>
           <p className="font-normal text-grey-2 text-lg">Company</p>
         </div>
-        <div className="col-span-6">
+        <div>
           <p className="font-normal text-grey-2 text-lg">Type</p>
         </div>
-        <div className="col-span-5">
+        <div>
           <p className="font-normal text-grey-2 text-lg">Project</p>
         </div>
       </div>
-      {ACCORDION_ENTRIES.map((entry, index) => {
+      {accordions.map((accordion, index) => {
         const shouldDisplayContent = isActiveIndex(index) || expandAll;
         const borderClass = !shouldDisplayContent
           ? "border-b border-grey-1"
@@ -55,46 +66,73 @@ function Accordion() {
             ? "text-black"
             : "text-grey-2";
 
+        const project = accordion?.project;
+        const year = accordion?.year;
+        const company = accordion?.company;
+        const type = accordion?.type;
+        const projectIsProtected =
+          (accordion?.projectIsProtected ?? false) && !passwordIsSet;
+
+        const cursorClass = projectIsProtected
+          ? "cursor-not-allowed"
+          : "cursor-pointer";
+
         return (
-          <>
+          <Fragment
+            key={`${project}${year}${type}${company}${
+              Date.now().toString(36) +
+              Math.floor(
+                Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12),
+              ).toString(36)
+            }`}
+          >
             <div
-              key={entry.toString(16)}
-              onClick={handleAccordionHeaderClick(index)}
-              className={`grid grid-cols-[2fr 3fr 6fr 5fr] grid-flow-col cursor-pointer ${borderClass}`}
+              onClick={
+                !projectIsProtected
+                  ? handleAccordionHeaderClick(index, projectIsProtected)
+                  : undefined
+              }
+              className={`grid grid-cols-[2fr_3fr_6fr_5fr] ${cursorClass} ${borderClass} pt-1.5 pb-2`}
+              title={
+                projectIsProtected
+                  ? "Enter password to see the project"
+                  : undefined
+              }
             >
-              <div className="col-span-2">
+              <div>
                 <p
                   className={`font-normal text-lg ${accordionHeaderTextColour}`}
                 >
-                  Year
+                  {year}
                 </p>
               </div>
-              <div className="col-span-3">
+              <div>
                 <p
                   className={`font-normal text-lg ${accordionHeaderTextColour}`}
                 >
-                  Company
+                  {company}
                 </p>
               </div>
-              <div className="col-span-6">
+              <div>
                 <p
                   className={`font-normal text-lg ${accordionHeaderTextColour}`}
                 >
-                  Type
+                  {type}
                 </p>
               </div>
-              <div className="col-span-5">
+              <div className="flex items-center justify-between">
                 <p
                   className={`font-normal text-lg ${accordionHeaderTextColour}`}
                 >
-                  Project
+                  {project}
                 </p>
+                {projectIsProtected && (
+                  <PadlockGray className="ml-auto fill-grey-2" />
+                )}
               </div>
             </div>
-            {shouldDisplayContent && (
-              <div className="">CONTENT OF THE SELECTED ACCORDION</div>
-            )}
-          </>
+            {shouldDisplayContent && <AccordionContent index={index} />}
+          </Fragment>
         );
       })}
     </>

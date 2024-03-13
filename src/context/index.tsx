@@ -4,16 +4,19 @@ import { isPasswordSet } from "utils/isPasswordSet";
 type Context = {
   expandAll: boolean;
   passwordIsSet: boolean;
+  activeIndex: number | null;
 };
 
 type AppState = Context & {
   toggleExpandAll(): void;
   togglePasswordIsSet(payload?: boolean): void;
+  setActiveIndex(index: number | null): void;
 };
 
 const INITIAL_STATE: Context = {
   expandAll: false,
   passwordIsSet: isPasswordSet(),
+  activeIndex: null,
 };
 
 type ExpandAllAction = {
@@ -26,7 +29,15 @@ type TogglePasswordIsSetAction = {
   payload: boolean;
 };
 
-type Action = ExpandAllAction | TogglePasswordIsSetAction;
+type SetActiveIndexAction = {
+  type: "SET_ACTIVE_INDEX";
+  payload: number | null;
+};
+
+type Action =
+  | ExpandAllAction
+  | TogglePasswordIsSetAction
+  | SetActiveIndexAction;
 
 const reducer = (state = INITIAL_STATE, action: Action) => {
   switch (action.type) {
@@ -36,13 +47,16 @@ const reducer = (state = INITIAL_STATE, action: Action) => {
     case "TOGGLE_PASSWORD_IS_SET":
       return { ...state, passwordIsSet: action.payload };
 
+    case "SET_ACTIVE_INDEX":
+      return { ...state, activeIndex: action.payload };
+
     default:
       return state;
   }
 };
 
 function useAppContextReducer(): AppState {
-  const [{ expandAll, passwordIsSet }, dispatch] = useReducer(
+  const [{ expandAll, passwordIsSet, activeIndex }, dispatch] = useReducer(
     reducer,
     INITIAL_STATE,
   );
@@ -55,9 +69,15 @@ function useAppContextReducer(): AppState {
     dispatch({ type: "TOGGLE_PASSWORD_IS_SET", payload });
   }
 
+  function setActiveIndex(index: number | null) {
+    dispatch({ type: "SET_ACTIVE_INDEX", payload: index });
+  }
+
   return {
+    activeIndex,
     expandAll,
     passwordIsSet,
+    setActiveIndex,
     toggleExpandAll,
     togglePasswordIsSet,
   };

@@ -52,6 +52,9 @@ dependencies:
   react-helmet:
     specifier: ^6.1.0
     version: 6.1.0(react@18.2.0)
+  react-slick:
+    specifier: ^0.30.2
+    version: 0.30.2(react-dom@18.2.0)(react@18.2.0)
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1(ts-node@10.9.1)
@@ -102,6 +105,9 @@ devDependencies:
   "@types/react-dom":
     specifier: ^18.2.18
     version: 18.2.18
+  "@types/react-slick":
+    specifier: ^0.23.13
+    version: 0.23.13
   "@types/testing-library__jest-dom":
     specifier: ^6.0.0
     version: 6.0.0(@types/jest@29.5.5)(jest@29.7.0)
@@ -4926,6 +4932,15 @@ packages:
       "@types/react": 18.2.46
     dev: true
 
+  /@types/react-slick@0.23.13:
+    resolution:
+      {
+        integrity: sha512-bNZfDhe/L8t5OQzIyhrRhBr/61pfBcWaYJoq6UDqFtv5LMwfg4NsVDD2J8N01JqdAdxLjOt66OZEp6PX+dGs/A==,
+      }
+    dependencies:
+      "@types/react": 18.2.46
+    dev: true
+
   /@types/react@18.2.46:
     resolution:
       {
@@ -7060,6 +7075,13 @@ packages:
       }
     dev: true
 
+  /classnames@2.5.1:
+    resolution:
+      {
+        integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==,
+      }
+    dev: false
+
   /clean-stack@2.2.0:
     resolution:
       {
@@ -8631,6 +8653,13 @@ packages:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.2.1
+
+  /enquire.js@2.1.6:
+    resolution:
+      {
+        integrity: sha512-/KujNpO+PT63F7Hlpu4h3pE3TokKRHN26JYmQpPyjkRD/N57R7bPDNojMXdi7uveAKjYB7yQnartCxZnFWr0Xw==,
+      }
+    dev: false
 
   /enquirer@2.4.1:
     resolution:
@@ -13350,6 +13379,15 @@ packages:
       }
     dev: false
 
+  /json2mq@0.2.0:
+    resolution:
+      {
+        integrity: sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==,
+      }
+    dependencies:
+      string-convert: 0.2.1
+    dev: false
+
   /json5@0.5.1:
     resolution:
       {
@@ -16799,6 +16837,24 @@ packages:
     dependencies:
       react: 18.2.0
 
+  /react-slick@0.30.2(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-XvQJi7mRHuiU3b9irsqS9SGIgftIfdV5/tNcURTb5LdIokRA5kIIx3l4rlq2XYHfxcSntXapoRg/GxaVOM1yfg==,
+      }
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      classnames: 2.5.1
+      enquire.js: 2.1.6
+      json2mq: 0.2.0
+      lodash.debounce: 4.0.8
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      resize-observer-polyfill: 1.5.1
+    dev: false
+
   /react@18.2.0:
     resolution:
       {
@@ -17141,6 +17197,13 @@ packages:
         integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==,
       }
     dev: true
+
+  /resize-observer-polyfill@1.5.1:
+    resolution:
+      {
+        integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==,
+      }
+    dev: false
 
   /resolve-alpn@1.2.1:
     resolution:
@@ -18002,6 +18065,13 @@ packages:
       }
     engines: { node: ">=0.6.19" }
     dev: true
+
+  /string-convert@0.2.1:
+    resolution:
+      {
+        integrity: sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==,
+      }
+    dev: false
 
   /string-env-interpolation@1.0.1:
     resolution:

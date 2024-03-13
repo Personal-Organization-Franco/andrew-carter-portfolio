@@ -8,13 +8,6 @@ export const useHeroSection = () => {
           heroText {
             raw
           }
-          watchOverlay {
-            gatsbyImageData(
-              layout: CONSTRAINED
-              placeholder: BLURRED
-              formats: [AUTO, WEBP, AVIF]
-            )
-          }
           watchBackground {
             gatsbyImageData(
               layout: CONSTRAINED

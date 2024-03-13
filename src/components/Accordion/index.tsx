@@ -24,7 +24,8 @@ function Accordion() {
   );
 
   const handleAccordionHeaderClick =
-    (index: number, projectIsProtected: boolean) => () => {
+    (index: number, projectIsProtected: boolean) =>
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (projectIsProtected) return;
       if (expandAll) {
         toggleExpandAll();
@@ -38,11 +39,17 @@ function Accordion() {
       }
 
       setActiveIndex(index);
+      setTimeout(() => {
+        window.scrollTo({
+          top: e.currentTarget?.getBoundingClientRect().top ?? 0,
+          behavior: "smooth",
+        });
+      }, 200);
     };
   const accordions = accordionSectionData?.accordions || [];
   return (
     <>
-      <div className="grid grid-cols-[2fr_3fr_6fr_5fr]">
+      <div className="grid grid-cols-[2fr_3fr_6fr_5fr] accordion-header">
         {/* Grid header */}
         <div>
           <p className="font-normal text-grey-2 text-lg">Year</p>

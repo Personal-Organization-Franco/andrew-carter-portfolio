@@ -13,6 +13,7 @@ export const useAccordionSection = () => {
           company
           project
           projectIsProtected
+          projectInformationTitle
           projectInformation {
             raw
           }
@@ -21,23 +22,6 @@ export const useAccordionSection = () => {
           layout {
             type
             layout {
-              ... on ContentfulImageCarousel7030 {
-                carouselImages {
-                  gatsbyImageData(
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: [AUTO, WEBP, AVIF]
-                  )
-                  url
-                }
-                singleImage {
-                  gatsbyImageData(
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: [AUTO, WEBP, AVIF]
-                  )
-                }
-              }
               ... on ContentfulVideoCarousel2080 {
                 video {
                   url
@@ -47,7 +31,6 @@ export const useAccordionSection = () => {
                 }
               }
               ... on ContentfulOneImageOneVideo5050 {
-                name
                 imageAndVideo {
                   file {
                     contentType
@@ -58,6 +41,18 @@ export const useAccordionSection = () => {
                     placeholder: BLURRED
                     formats: [AUTO, WEBP, AVIF]
                   )
+                  height
+                  size
+                }
+              }
+              ... on ContentfulVariableWidthCarouselImages {
+                variableWidthImages {
+                  gatsbyImageData(
+                    layout: CONSTRAINED
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                  )
+                  url
                 }
               }
             }

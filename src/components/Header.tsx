@@ -61,7 +61,7 @@ const Header = () => {
     : "";
 
   return (
-    <header className="flex justify-between pl-1.5 border-b border-b-grey-1 mb-4 sticky top-0 bg-white z-10">
+    <header className="flex justify-between pl-1.5 border-b border-b-grey-1 mb-4 bg-white">
       <div className="text-black text-lg font-normal pb-2 pt-[9px]">
         Andrew Carter
       </div>

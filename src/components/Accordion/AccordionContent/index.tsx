@@ -20,6 +20,7 @@ export function AccordionContent({ index }: { index: number }) {
     const layout5050 = LAYOUT && "imageAndVideo" in LAYOUT;
     const layoutVariableWidth = LAYOUT && "variableWidthImages" in LAYOUT;
     const layout2080 = LAYOUT && "video" in LAYOUT;
+    const layoutFullWidth = LAYOUT && "imageOrVideo" in LAYOUT;
     if (layout5050) {
       const imageAndVideo = LAYOUT?.imageAndVideo ?? [];
       return (
@@ -68,7 +69,7 @@ export function AccordionContent({ index }: { index: number }) {
               slidesToShow: 1,
               slidesToScroll: 1,
               variableWidth: true,
-              arrows: false,
+              customPaging: i => <div className="marker" />,
             }}
           >
             {variableWidthImages.map((item, index) => {
@@ -109,7 +110,7 @@ export function AccordionContent({ index }: { index: number }) {
               infinite: true,
               slidesToShow: 1,
               slidesToScroll: 1,
-              arrows: false,
+              customPaging: i => <div className="marker" />,
             }}
           >
             {carouselImages.map((item, index) => {
@@ -128,13 +129,42 @@ export function AccordionContent({ index }: { index: number }) {
         </div>
       );
     }
+    if (layoutFullWidth) {
+      const imageOrVideo = LAYOUT?.imageOrVideo;
+      const image = getImage(imageOrVideo?.gatsbyImageData ?? null);
+      const isVideo = imageOrVideo?.file?.contentType?.includes("video");
+      return (
+        <div className="grid grid-cols-1">
+          {isVideo ? (
+            <video
+              src={imageOrVideo?.file?.url ?? ""}
+              controls
+              disablePictureInPicture
+              autoPlay
+              loop
+              disableRemotePlayback
+              controlsList="nodownload noplaybackrate"
+              className="w-full rounded-lg max-h-[950px]"
+            />
+          ) : (
+            image && (
+              <GatsbyImage
+                image={image}
+                alt="image 100% width"
+                className="rounded-lg"
+              />
+            )
+          )}
+        </div>
+      );
+    }
     return null;
   };
 
   return (
     <div>
       {renderAccordionContent()}
-      <div className="grid grid-cols-[1fr_2fr] grid-flow-col mt-6">
+      <div className="grid grid-cols-[1fr_2fr_1fr] grid-flow-col mt-6">
         <p className="font-normal text-black text-lg">
           {projectInformationTitle}
         </p>

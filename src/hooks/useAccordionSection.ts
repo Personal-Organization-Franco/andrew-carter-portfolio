@@ -55,6 +55,21 @@ export const useAccordionSection = () => {
                   url
                 }
               }
+              ... on ContentfulOneFullWidthImageOrVideo {
+                id
+                name
+                imageOrVideo {
+                  file {
+                    contentType
+                    url
+                  }
+                  gatsbyImageData(
+                    layout: CONSTRAINED
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                  )
+                }
+              }
             }
           }
         }

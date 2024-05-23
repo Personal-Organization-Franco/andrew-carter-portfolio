@@ -101,7 +101,7 @@ export function AccordionContent({ index }: { index: number }) {
             loop
             disableRemotePlayback
             controlsList="nodownload noplaybackrate"
-            className="rounded-lg"
+            className="rounded-lg min-w-96"
           />
           <Slider
             {...{

@@ -15,7 +15,7 @@ function AccordionSection() {
   } = accordionSectionData || {};
 
   return (
-    <div className="-mt-16">
+    <div className="-mt-16 mb-44">
       <p className="font-normal text-grey-2 text-lg mb-2">
         {projectsIndexText}
       </p>

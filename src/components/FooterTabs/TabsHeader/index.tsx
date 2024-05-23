@@ -22,7 +22,7 @@ export function TabsHeader() {
     [footerTabsActiveIndex],
   );
   return (
-    <div className="flex">
+    <div className="flex pb-2.5">
       {data?.tabs?.map((tab, index) => {
         const textColorClass = `${
           isActiveIndex(index) ? "text-black" : "text-grey-3"

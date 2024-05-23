@@ -1,4 +1,5 @@
 import Footer from "./Footer";
+import FooterTabs from "./FooterTabs";
 import Header from "./Header";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -6,7 +7,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <main className="flex flex-col min-h-screen">
       <Header />
       <section className="grow px-1.5">{children}</section>
-      <Footer>This is a fucking footer haq ghal Madonni</Footer>
+      <Footer>
+        <FooterTabs />
+      </Footer>
     </main>
   );
 };
